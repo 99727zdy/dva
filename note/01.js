@@ -45,19 +45,85 @@
 
 // iterator.next()
 
-let str ="hello";
+// let str ="hello";
 
-for(let s of str){
-  console.log(s);
+// for(let s of str){
+//   console.log(s);
+// }
+
+
+// let paras =document.querySelectorAll("p")
+
+// for (let p of paras){
+//   p.classList.add("test")
+// }
+
+
+//增加  删除   修改    筛选    展示所有
+//add delete change  filter   showAll
+
+
+
+const initialState = ShowAll
+ 
+function visibilityFilter(state=initialState,action){
+  switch(action.type){
+    case 'Filter':
+    return action.filter
+    default:
+    return state
+  }
 }
 
 
-let paras =document.querySelectorAll("p")
-
-for (let p of paras){
-  p.classList.add("test")
+function todos(state=[],action){
+  switch(action.type){
+    case 'Add':
+    return [
+      ...state,{
+        text:action.text,
+        complete:false
+      }
+    ]
+    case 'Delete':
+    return [...state].s
+  }
 }
 
 
+a=[{a:"a",b:"b"}]
+
+console.log([...a,{c:"c",d:"d"}]);
+
+console.log([...a])
 
 
+const todos = {
+  state: [],
+  reducers: {
+    add(state, action) {
+      return [
+        ...state,
+        action.payload,
+      ]
+    },
+    remove(state, action) {
+      return state.filter((v) => v.id !== action.payload.id)
+    },
+    update(state, action) {
+      return state.map(v => {
+        if(v.id === action.payload.id) {
+          return action.payload;
+        }
+        return v;
+      })
+    },
+    getAll(state, action) {
+      return state.list;
+    },
+    getById(state, action) {
+      return state.filter(v => v.id === action.payload.id)
+    },
+    switch_visible(state, action) {}
+  }
+}
